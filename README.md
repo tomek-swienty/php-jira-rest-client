@@ -1,4 +1,4 @@
-# PHP JIRA Rest Client
+# PHP JIRA Rest Client (Fork for 2.5.1 branch)
 
 [![Latest Stable Version](https://poser.pugx.org/lesstif/php-jira-rest-client/v/stable)](https://packagist.org/packages/lesstif/php-jira-rest-client)
 [![Latest Unstable Version](https://poser.pugx.org/lesstif/php-jira-rest-client/v/unstable)](https://packagist.org/packages/lesstif/php-jira-rest-client)
