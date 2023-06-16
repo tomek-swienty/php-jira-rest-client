@@ -1,11 +1,11 @@
-# PHP JIRA Rest Client (Fork for 2.6 version)
+# PHP JIRA Rest Client
 
 [![Latest Stable Version](https://poser.pugx.org/lesstif/php-jira-rest-client/v/stable)](https://packagist.org/packages/lesstif/php-jira-rest-client)
 [![Latest Unstable Version](https://poser.pugx.org/lesstif/php-jira-rest-client/v/unstable)](https://packagist.org/packages/lesstif/php-jira-rest-client)
 [![Build Status](https://travis-ci.org/lesstif/php-jira-rest-client.svg?branch=master)](https://travis-ci.org/lesstif/php-jira-rest-client)
-[![StyleCI](https://styleci.io/repos/30015369/shield?branch=main&style=flat)](https://styleci.io/repos/30015369)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/lesstif/php-jira-rest-client/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/lesstif/php-jira-rest-client/?branch=main)
-[![Coverage Status](https://coveralls.io/repos/github/lesstif/php-jira-rest-client/badge.svg)](https://coveralls.io/github/lesstif/php-jira-rest-client)
+[![StyleCI](https://styleci.io/repos/30015369/shield?branch=master&style=flat)](https://styleci.io/repos/30015369)
+[![Scrutinizer](https://img.shields.io/scrutinizer/g/lesstif/php-jira-rest-client/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/lesstif/php-jira-rest-client/)
+[![Coverage Status](https://coveralls.io/repos/github/lesstif/php-jira-rest-client/badge.svg?branch=master)](https://coveralls.io/github/lesstif/php-jira-rest-client?branch=master)
 [![License](https://poser.pugx.org/lesstif/php-jira-rest-client/license)](https://packagist.org/packages/lesstif/php-jira-rest-client)
 [![Total Downloads](https://poser.pugx.org/lesstif/php-jira-rest-client/downloads)](https://packagist.org/packages/lesstif/php-jira-rest-client)
 [![Monthly Downloads](https://poser.pugx.org/lesstif/php-jira-rest-client/d/monthly)](https://packagist.org/packages/lesstif/php-jira-rest-client)
@@ -65,9 +65,6 @@ copy .env.example file to .env on your project root.
 JIRA_HOST="https://your-jira.host.com"
 JIRA_USER="jira-username"
 JIRA_PASS="jira-password-OR-api-token"
-# if TOKEN_BASED_AUTH set to true, ignore JIRA_USER and JIRA_PASS.
-TOKEN_BASED_AUTH=true
-PERSONAL_ACCESS_TOKEN="your-access-token-here"
 # to enable session cookie authorization
 # COOKIE_AUTH_ENABLED=true
 # COOKIE_FILE=storage/jira-cookie.txt

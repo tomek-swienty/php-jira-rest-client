@@ -35,5 +35,3 @@ public/
 storage/
 
 .phpunit.result.cache
-.env*
-.php_cs.cache

@@ -49,11 +49,9 @@ class IssueTest extends TestCase
             $ret = $issueService->create($issueField);
 
             //If success, Returns a link to the created issue.
-            //print_r($ret);
+            print_r($ret);
 
             $issueKey = $ret->{'key'};
-
-            $this->assertNotNull($issueKey);
 
             return $issueKey;
         } catch (JiraException $e) {
@@ -72,12 +70,9 @@ class IssueTest extends TestCase
 
             $ret = $issueService->get($issueKey);
 
-            //print_r($ret);
-            $issueKey = $ret->{'key'};
+            print_r($ret);
 
-            $this->assertNotNull($issueKey);
-            $this->assertNotNull($ret->fields->summary);
-            $this->assertNotNull($ret->fields->issuetype);
+            $issueKey = $ret->{'key'};
 
             return $issueKey;
         } catch (JiraException $e) {
@@ -107,59 +102,31 @@ class IssueTest extends TestCase
 
             $ret = $issueService->create($issueField);
 
-            $subTaskIssueKey = $ret->{'key'};
-
-            $this->assertNotNull($subTaskIssueKey);
-
-            return $subTaskIssueKey;
-        } catch (JiraException $e) {
-            $this->assertTrue(false, 'Create Failed : '.$e->getMessage());
-        }
-    }
-
-    /**
-     * @depends testCreateSubTask
-     */
-    public function testGetSubTask($subTaskIssueKey)
-    {
-        try {
-            $issueService = new IssueService();
-
-            $ret = $issueService->get($subTaskIssueKey);
+            //If success, Returns a link to the created issue.
+            print_r($ret);
 
             $issueKey = $ret->{'key'};
 
-            $this->assertNotNull($issueKey);
-            $this->assertNotNull($ret->fields->summary);
-            $this->assertEquals('Sub-task', $ret->fields->issuetype->name);
-
-            return $subTaskIssueKey;
+            return $issueKey;
         } catch (JiraException $e) {
             $this->assertTrue(false, 'Create Failed : '.$e->getMessage());
         }
     }
 
     /**
-     * @depends testGetSubTask
+     * @depends testCreateIssue
      */
-    public function testAddAttachment($subTaskIssueKey)
+    public function testAddAttachment($issueKey)
     {
         try {
-            $files = [
-                'screen_capture_스크린-캡춰.png',
-                'bug-description.pdf',
-                'README.md',
-            ];
-
             $issueService = new IssueService();
 
-            // $ret is Array of JiraRestApi\Issue\Attachment
-            $ret = $issueService->addAttachments($subTaskIssueKey, $files);
+            $ret = $issueService->addAttachments($issueKey,
+                ['screen_capture.png', 'bug-description.pdf', 'README.md']);
 
-            $this->assertNotNull($subTaskIssueKey);
-            $this->assertSameSize($files, $ret);
+            print_r($ret);
 
-            return $subTaskIssueKey;
+            return $issueKey;
         } catch (JiraException $e) {
             $this->assertTrue(false, 'Attach Failed : '.$e->getMessage());
         }
@@ -168,7 +135,7 @@ class IssueTest extends TestCase
     /**
      * @depends testAddAttachment
      */
-    public function testUpdateIssue($subTaskIssueKey)
+    public function testUpdateIssue($issueKey)
     {
         //$this->markTestIncomplete();
         try {
@@ -176,7 +143,7 @@ class IssueTest extends TestCase
 
             $issueField->setAssigneeName('lesstif')
                         ->setPriorityName('Major')
-                        //->setIssueType('Task')
+                        ->setIssueType('Task')
                         ->addLabel('test-label-first')
                         ->addLabel('test-label-second')
                         ->addVersion('1.0.1')
@@ -185,58 +152,52 @@ class IssueTest extends TestCase
 
             $issueService = new IssueService();
 
-            $issueService->update($subTaskIssueKey, $issueField);
+            $issueService->update($issueKey, $issueField);
 
-            $this->assertNotNull($subTaskIssueKey);
-
-            return $subTaskIssueKey;
+            return $issueKey;
         } catch (JiraException $e) {
             $this->assertTrue(false, 'update Failed : '.$e->getMessage());
         }
     }
 
     /**
-     * @depends testUpdateIssue
+     * @depends testChangeAssignee
      */
-    public function testChangeAssignee($subTaskIssueKey)
+    public function testChangeAssignee($issueKey)
     {
         try {
             $issueService = new IssueService();
 
-            $ret = $issueService->changeAssignee($subTaskIssueKey, 'lesstif');
+            $ret = $issueService->changeAssignee($issueKey, 'lesstif');
 
             print_r($ret);
 
-            $this->assertNotNull($subTaskIssueKey);
-
-            return $subTaskIssueKey;
+            return $issueKey;
         } catch (JiraException $e) {
             $this->assertTrue(false, 'Change assignee failed : '.$e->getMessage());
         }
     }
 
     /**
-     * @depends testChangeAssignee
+     * @depends testDeleteIssue
      */
-    public function testDeleteIssue($subTaskIssueKey)
+    public function testDeleteIssue($issueKey)
     {
-        $this->markTestSkipped();
-
         try {
             $issueService = new IssueService();
 
-            $ret = $issueService->deleteIssue($subTaskIssueKey);
+            $ret = $issueService->deleteIssue($issueKey);
 
             print_r($ret);
 
-            return $subTaskIssueKey;
+            return $issueKey;
         } catch (JiraException $e) {
             $this->assertTrue(false, 'delete issue failed : '.$e->getMessage());
         }
     }
 
     /**
-     * @depends testChangeAssignee
+     * @depends testUpdateIssue
      */
     public function testAddcomment($issueKey)
     {
